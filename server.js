@@ -1,11 +1,16 @@
-var http = require("http");
+"use strict";
+
+// libs
+const http = require("http");
+const Req = require("./req.js");
+
+// start server
 var server = http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "application.json"});
-  var data = {};
-  data.status = "OK";
-  data.payload = "world";
-  response.write(JSON.stringify(data));
-  response.end();
+    if(request.method != 'POST') return request.connection.destroy();
+    var req = new Req(request, response);
+    request.on('data', req.onData.bind(req));
+    request.on('end', req.onEnd.bind(req));
 });
+
 server.listen(3333);
 console.log("Server up: 3333");
