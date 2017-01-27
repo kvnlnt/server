@@ -10,5 +10,5 @@ module.exports = {
     },
     delete: function(payload, cb){
         return cb(null, payload);
-    },
+    }
 };
