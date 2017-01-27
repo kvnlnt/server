@@ -1,10 +1,11 @@
 #!/bin/bash
 
+TEST="Can delete property"
 PAYLOAD='{"resource":"/property/delete","payload":"world"}'
-TEST="$(curl -s -H "Content-Type: application/json" -X POST -d ${PAYLOAD} http://localhost:3333 | jq '.payload' | xargs)"
-if [ "$TEST" = "world" ]
+RESULT="$(curl -s -H "Content-Type: application/json" -X POST -d ${PAYLOAD} http://localhost:3333 | jq '.payload' | xargs)"
+if [ "$RESULT" = "world" ]
 then
-    PASSED+=('Can delete property')
+    PASSED+=("$TEST")
 else 
-    FAILED+=('Can delete property')
+    FAILED+=("$TEST")
 fi

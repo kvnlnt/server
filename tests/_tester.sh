@@ -8,13 +8,26 @@ PASSED=()
 FAILED=()
 
 ##
+## START SERVER
+##
+node server &
+background_pid=$!
+
+##
 ## TESTS
 ##
 
 . tests/property-create.sh
-. tests/property-read.sh
-. tests/property-update.sh
-. tests/property-delete.sh
+# . tests/property-read.sh
+# . tests/property-update.sh
+# . tests/property-delete.sh
+
+
+##
+## KILL SERVER
+##
+kill -2 "$background_pid"
+kill -15 "$background_pid"
 
 ##
 ## RESULTS

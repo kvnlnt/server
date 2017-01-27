@@ -1,4 +1,3 @@
 # SETUP
 
-## Install JQ
-https://stedolan.github.io/jq/
+    brew install jq

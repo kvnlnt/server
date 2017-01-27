@@ -1,10 +1,11 @@
 #!/bin/bash
 
+TEST="Can read property"
 PAYLOAD='{"resource":"/property/read","payload":"world"}'
-TEST="$(curl -s -H "Content-Type: application/json" -X POST -d ${PAYLOAD} http://localhost:3333 | jq '.payload' | xargs)"
-if [ "$TEST" = "world" ]
+RESULT="$(curl -s -H "Content-Type: application/json" -X POST -d ${PAYLOAD} http://localhost:3333 | jq '.payload' | xargs)"
+if [ "$RESULT" = "world" ]
 then
-    PASSED+=('Can read property')
+    PASSED+=("$TEST")
 else 
-    FAILED+=('Can read property')
+    FAILED+=("$TEST")
 fi
