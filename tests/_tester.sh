@@ -10,40 +10,37 @@ FAILED=()
 ##
 ## START SERVER
 ##
-node server &
-background_pid=$!
+nohup node server </dev/null >/dev/null 2>&1 & # detached w/ no output
+PID=$! # capture process id
+sleep 1 # give server chance to start
 
 ##
 ## TESTS
 ##
 
 . tests/property-create.sh
-# . tests/property-read.sh
-# . tests/property-update.sh
-# . tests/property-delete.sh
-
-
-##
-## KILL SERVER
-##
-kill -2 "$background_pid"
-kill -15 "$background_pid"
+. tests/property-read.sh
+. tests/property-update.sh
+. tests/property-delete.sh
 
 ##
 ## RESULTS
 ##
 
-echo
-echo "\x1b[32;01mPASSED\x1b[0m"
 for i in "${PASSED[@]}"
 do
-    echo $i
+    echo "\x1b[32;01m \xE2\x9C\x93 \x1b[0m $i"
 done
 
-echo
-echo "\x1b[31;01mFAILED\x1b[0m"
 for i in "${FAILED[@]}"
 do
-    echo $i
+    echo "\x1b[31;01m X \x1b[0m $i"
 done
 echo
+
+##
+## KILL SERVER
+##
+kill -2 "$PID"
+kill -15 "$PID"
+
