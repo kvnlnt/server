@@ -1,0 +1,2 @@
+- implement dotenv
+- protect production from db install scripts

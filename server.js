@@ -7,7 +7,7 @@ const http = require("http");
 const Property = require("./resources/property");
 
 // resource endpoints
-const resources = {};
+var resources = {};
 resources["/property/create"] = Property.create;
 resources["/property/read"] = Property.read;
 resources["/property/update"] = Property.update;

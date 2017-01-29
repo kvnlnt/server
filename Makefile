@@ -9,6 +9,7 @@ help:
 	@echo ${TITLE} HELP
 	@echo ""
 	@echo "clean 		clean the build"
+	@echo "db 			create database"
 	@echo "test 		run all tests"
 	@echo ""
 
@@ -16,11 +17,18 @@ help:
 
 clean:
 	@echo ""
-	@echo ${TITLE} CLEAN
+	@echo ${TITLE} CLEANING
 	@echo ""
 
+db:
+	@echo ""
+	@echo ${TITLE} CREATING DATABASE
+	@echo ""
+	@sh ./database/_database.sh
+
 test:
+	@make db
 	@echo ""
-	@echo ${TITLE} TEST
+	@echo ${TITLE} TESTING
 	@echo ""
-	@sh ./tests/_tester.sh
+	@sh ./tests/_tests.sh
