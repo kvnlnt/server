@@ -11,7 +11,7 @@ FAILED=()
 ## START SERVER
 ##
 # nohup node server </dev/null >/dev/null 2>&1 & # detached w/ no output
-nohup node server > './tests/_tests.out' 2>&1&
+nohup node server > './logs/tests.out' 2>&1&
 PID=$! # capture process id
 sleep 1 # give server chance to start
 
