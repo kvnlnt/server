@@ -4,31 +4,47 @@ TITLE="\x1b[96;01mSERVER\x1b[0m"
 
 # HELP
 
-help:
+app\:help:
 	@echo ""
 	@echo ${TITLE} HELP
 	@echo ""
-	@echo "clean 		clean the build"
-	@echo "db 			create database"
-	@echo "test 		run all tests"
+	@echo "app:clean 		clean the build"
+	@echo "app:start 		starts server"
+	@echo "app:stop 		stops server"
+	@echo "app:test 		run all tests"
+	@echo "db:install		create database"
 	@echo ""
 
 # COMMANDS
 
-clean:
-	@echo ""
-	@echo ${TITLE} CLEANING
-	@echo ""
+app\:clean:
+	@echo ${TITLE}
+	@echo "==> CLEANING APP"
+	@echo "==> APP CLEANED"
 
-db:
-	@echo ""
-	@echo ${TITLE} CREATING DATABASE
-	@echo ""
-	@sh ./database/_database.sh
+app\:stop:
+	@echo ${TITLE}
+	@echo "==> STOPPING APP"
+	@sh ./tasks/stop.sh
+	@echo "==> APP STOPPED"
 
-test:
-	@make db
-	@echo ""
-	@echo ${TITLE} TESTING
-	@echo ""
+app\:start:
+	@make app:stop
+	@echo ${TITLE}
+	@echo "==> STARTING APP"
+	@sh ./tasks/start.sh
+	@echo "==> APP STARTED"
+
+app\:test:
+	@make db:install
+	@make app:stop
+	@echo ${TITLE}
+	@echo "==> STARTING & TESTING APP"
 	@sh ./tests/_tests.sh
+	@echo "==> APP TESTED"
+
+db\:install:
+	@echo ${TITLE}
+	@echo "==> INSTALLING DATABASE"
+	@sh ./database/_database.sh
+	@echo "==> DATABASE INSTALLED"
