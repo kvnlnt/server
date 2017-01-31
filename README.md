@@ -44,6 +44,7 @@ What are we giving up?
 Why don't you just clone this repo and try it out for yourself?
 
 ## SETUP
+If you haven't got them installed already :D
 
     brew intall node
     brew install jq
