@@ -41,6 +41,8 @@ What are we giving up?
 * Everything is a 200 HTTP code. So?
 * Multipart/form-data. Base64 encode it or post it to a CDN where it belongs.
 
+Why don't you just clone this repo and try it out for yourself?
+
 ## SETUP
 
     brew intall node
