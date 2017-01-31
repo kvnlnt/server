@@ -62,4 +62,5 @@ var server = http.createServer(function(request, response) {
 });
 
 server.listen(3333);
-console.log("Server up: 3333");
+var now = Math.floor(new Date() / 1000);
+console.log("cmd=APP:START port=3333 ts="+now);

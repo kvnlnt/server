@@ -17,6 +17,7 @@ app\:help:
 	@echo "db:backup		backup database"
 	@echo "db:install		install database"
 	@echo "db:restart		restart database"
+	@echo "db:setup			install and setup mysql"
 	@echo "db:start			start database"
 	@echo "db:stop			stop database"
 	@echo ""
@@ -46,11 +47,9 @@ app\:start:
 	@echo ${STATUS} "APP STARTED"
 
 app\:test:
-	@make db:install
-	@make app:stop
 	@echo ${TITLE}
 	@echo ${STATUS} "STARTING & TESTING APP"
-	@sh ./tasks/app-ztest.sh
+	@sh ./tasks/app-test.sh
 	@echo ${STATUS} "APP TESTED"
 
 # DATABASE
@@ -73,6 +72,12 @@ db\:restart:
 	@echo ${STATUS} "RESTARTING DATABASE"
 	@mysql.server restart
 	@echo ${STATUS} "DATABASE RESTARTED"
+
+db\:setup:
+	@echo ${TITLE}
+	@echo ${STATUS} "SETTING UP DATABASE"
+	@sh ./tasks/database-setup.sh
+	@echo ${STATUS} "DATABASE SETUP"
 
 db\:start:
 	@echo ${TITLE}
