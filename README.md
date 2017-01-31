@@ -9,7 +9,7 @@ What if there was a node based server that only accepted `HTTP POST` in the form
 What if we then simply mapped the `resource` value to a single function and passed it the value of the `payload`? We might have something that looked something like this:
 
     ./resources/users.js
-    module.exports = {
+    Users = {
         read: function(payload, cb){
             ... now do someting with payload.id
             ... like get user from database by id
@@ -22,7 +22,7 @@ What if we then simply mapped the `resource` value to a single function and pass
 
     // ./controller.js
     const resources = {};
-    resources["/users/read"] = Property.create;
+    resources["/users/read"] = Users.read;
     ...
     
     // ./server.js
