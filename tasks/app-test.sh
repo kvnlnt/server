@@ -7,12 +7,6 @@
 PASSED=()
 FAILED=()
 
-##
-## START SERVER
-##
-# nohup node server </dev/null >/dev/null 2>&1 & # detached w/ no output
-nohup node server > './logs/tests.out' 2>&1&
-PID=$! # capture process id
 sleep 1 # give server chance to start
 
 ##
@@ -37,10 +31,4 @@ for i in "${FAILED[@]}"
 do
     echo "\x1b[31;01m X \x1b[0m $i"
 done
-
-##
-## KILL SERVER
-##
-kill -2 "$PID"
-kill -15 "$PID"
 

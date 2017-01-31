@@ -1,92 +1,91 @@
+#!/bin/bash
+
 .PHONY: docs test
 
-TITLE="\x1b[96;01mSERVER\x1b[0m"
-STATUS="\x1b[96;01m\xE2\x80\xA2\x1b[0m"
+STATUS:="\x1b[96;01m\xE2\x80\xA2\x1b[0m"
 
 # HELP
 
 app\:help:
 	@echo ""
-	@echo ${TITLE} HELP
+	@echo ${STATUS} HELP
 	@echo ""
 	@echo "app:clean 		clean the build"
 	@echo "app:restart		restarts server"
 	@echo "app:start 		starts server"
 	@echo "app:stop 		stops server"
 	@echo "app:test 		run all tests"
-	@echo "db:backup		backup database"
+	@echo "db:backup 		backup database"
 	@echo "db:install		install database"
 	@echo "db:restart		restart database"
-	@echo "db:setup			install and setup mysql"
-	@echo "db:start			start database"
-	@echo "db:stop			stop database"
+	@echo "db:setup 		install and setup database env (mysql)"
+	@echo "db:start 		start database"
+	@echo "db:stop  		stop database"
 	@echo ""
+
+# FUNCTIONS
+define log
+	echo ${STATUS} $2
+	echo "$1|"`date "+%Y%m%d-%H%M%S"` >> ./logs/`date "+%Y%m".log`
+endef
 
 # APP
 
 app\:clean:
-	@echo ${TITLE}
-	@echo ${STATUS} "CLEANING APP"
+	@$(call log, "app:clean", "...CLEANING APP")
 	@sh ./tasks/app-clean.sh
-	@echo ${STATUS} "APP CLEANED"
+	@$(call log, "app:clean", "APP CLEANED")
 
 app\:restart:
 	@make app:stop
 	@make app:start
 
 app\:stop:
-	@echo ${TITLE}
-	@echo ${STATUS} "STOPPING APP"
+	@$(call log, "app:stop", "...STOPPING APP")
 	@sh ./tasks/app-stop.sh
-	@echo ${STATUS} "APP STOPPED"
+	@$(call log, "app:stop", "APP STOPPED")
 
 app\:start:
-	@echo ${TITLE}
-	@echo ${STATUS} "STARTING APP"
+	@$(call log, "app:start", "...STARTING APP")
 	@sh ./tasks/app-start.sh
-	@echo ${STATUS} "APP STARTED"
+	@$(call log, "app:start", "APP STARTED")
 
 app\:test:
-	@echo ${TITLE}
-	@echo ${STATUS} "STARTING & TESTING APP"
+	@make app:start
+	@$(call log, "app:test", "...TESTING APP")
 	@sh ./tasks/app-test.sh
-	@echo ${STATUS} "APP TESTED"
+	@$(call log, "app:test", "APP TESTED")
+	@make app:stop
 
 # DATABASE
 
 db\:backup:
-	@echo ${TITLE}
-	@echo ${STATUS} "BACKING UP DATABASE"
+	@$(call log, "db:backup", "...BACKING UP DATABASE")
 	@sh ./tasks/database-backup.sh
-	@echo ${STATUS} "DATABASE BACKED UP"
+	@$(call log, "db:backup", "DATABASE BACKED UP")
 
 db\:install:
 	@make db:backup
-	@echo ${TITLE}
-	@echo ${STATUS} "INSTALLING DATABASE"
+	@$(call log, "db:install", "...INSTALLING DATABASE")
 	@sh ./tasks/database-install.sh
-	@echo ${STATUS} "DATABASE INSTALLED"
+	@$(call log, "db:install", "DATABASE INSTALLED")
 
 db\:restart:
-	@echo ${TITLE}
-	@echo ${STATUS} "RESTARTING DATABASE"
+	@$(call log, "db:restart", "...RESTARTING DATABASE")
 	@mysql.server restart
-	@echo ${STATUS} "DATABASE RESTARTED"
+	@$(call log, "db:restart", "DATABASE RESTARTED")
 
 db\:setup:
-	@echo ${TITLE}
-	@echo ${STATUS} "SETTING UP DATABASE"
+	@$(call log, "db:setup", "...SETTING UP DATABASE ENVIRONMENT")
 	@sh ./tasks/database-setup.sh
-	@echo ${STATUS} "DATABASE SETUP"
+	@$(call log, "db:setup", "DATABASE SETUP")
 
 db\:start:
-	@echo ${TITLE}
-	@echo ${STATUS} "STARTING DATABASE"
+	@$(call log, "db:start", "...STARTING DATABASE")
 	@mysql.server start
-	@echo ${STATUS} "DATABASE STARTED"
+	@$(call log, "db:start", "DATABASE STARTED")
 
 db\:stop:
-	@echo ${TITLE}
-	@echo ${STATUS} "STOPPING DATABASE"
+	@$(call log, "db:stop", "...STOPPING DATABASE")
 	@mysql.server stop
-	@echo ${STATUS} "DATABASE STOPPED"
+	@$(call log, "db:stop", "DATABASE STOPPED")
