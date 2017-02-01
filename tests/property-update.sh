@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env
 
 TEST="Can update property"
 PAYLOAD="$(cat ./tests/property-update.json | jq '.' -c)"

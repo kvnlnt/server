@@ -2,6 +2,7 @@
 
 // libs
 const http = require("http");
+const mysql = require('mysql');
 
 // resources
 const Property = require("./resources/property");
@@ -10,6 +11,7 @@ const Property = require("./resources/property");
 var resources = {};
 resources["/property/create"] = Property.create;
 resources["/property/read"] = Property.read;
+resources["/property/list"] = Property.list;
 resources["/property/update"] = Property.update;
 resources["/property/delete"] = Property.delete;
 
@@ -37,7 +39,16 @@ class Register {
         // kill request for resources that don't exist
         if(!resources.hasOwnProperty(payload.resource)) request.connection.destroy();
 
-        resources[payload.resource](payload.payload, function(err, result){
+        var dbConnection = mysql.createConnection({
+          host     : 'localhost',
+          user     : 'root',
+          password : 'root',
+          database : 'valtworks'
+        });
+
+        dbConnection.connect();
+
+        resources[payload.resource](payload.payload, dbConnection, function(err, result){
             if(err) {
                 data.status = "ERROR";
                 data.payload = err;
@@ -48,6 +59,7 @@ class Register {
             that.response.writeHead(200, that.head);
             that.response.write(JSON.stringify(data));
             that.response.end();
+            dbConnection.end();
         });
     }
 

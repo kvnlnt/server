@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env
 
 ##
 ## PARAMS
@@ -15,6 +15,7 @@ sleep 1 # give server chance to start
 
 . tests/property-create.sh
 . tests/property-read.sh
+. tests/property-list.sh
 . tests/property-update.sh
 . tests/property-delete.sh
 

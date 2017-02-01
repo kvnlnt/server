@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env
 
 .PHONY: docs test
 
@@ -11,6 +11,7 @@ app\:help:
 	@echo ${STATUS} HELP
 	@echo ""
 	@echo "app:clean 		clean the build"
+	@echo "app:perf 		performance test"
 	@echo "app:restart		restarts server"
 	@echo "app:start 		starts server"
 	@echo "app:stop 		stops server"
@@ -35,6 +36,13 @@ app\:clean:
 	@$(call log, "app:clean", "...CLEANING APP")
 	@sh ./tasks/app-clean.sh
 	@$(call log, "app:clean", "APP CLEANED")
+
+app\:perf:
+	@make app:start
+	@$(call log, "app:test", "...STRESS TESTING APP")
+	@sh ./tests/app-perf.sh
+	@$(call log, "app:test", "APP STRESS TESTED")
+	@make app:stop
 
 app\:restart:
 	@make app:stop

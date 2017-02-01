@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env
 
 TEST="Can read property"
 PAYLOAD="$(cat ./tests/property-read.json | jq '.' -c)"

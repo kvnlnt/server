@@ -27,11 +27,11 @@ CREATE PROCEDURE property_read(_id INT)
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE property_list(_id INT)
+CREATE PROCEDURE property_list(_limit INT, _offset INT)
     BEGIN
     SELECT * 
     FROM properties
-    WHERE id = _id;
+    LIMIT _limit, _offset;
     END $$
 DELIMITER ;
 

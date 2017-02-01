@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env
 
 TEST="Can create property"
 PAYLOAD="$(cat ./tests/property-create.json | jq '.' -c)"

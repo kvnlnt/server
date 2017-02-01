@@ -1,14 +1,20 @@
 module.exports = {
-    create: function(payload, cb){
+    create: function(payload, db, cb){
         return cb(null, payload);
     },
-    read: function(payload, cb){
+    read: function(payload, db, cb){
         return cb(null, payload);
     },
-    update: function(payload, cb){
+    list: function(payload, db, cb){
+        db.query('CALL property_list(1,1)', function (error, results, fields) {
+          if (error) return cb(error, error);
+          return cb(null, results[0][0]);
+        });
+    },
+    update: function(payload, db, cb){
         return cb(null, payload);
     },
-    delete: function(payload, cb){
+    delete: function(payload, db, cb){
         return cb(null, payload);
     }
 };

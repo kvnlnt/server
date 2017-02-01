@@ -1,1 +1,1 @@
-mysql --user=root < ./sql/database-install.sql
+mysql --user=root --password < ./sql/database-install.sql

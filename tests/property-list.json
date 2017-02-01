@@ -1,0 +1,7 @@
+{
+    "resource":"/property/read",
+    "payload":{
+        "limit":1,
+        "offset":1
+    }
+}

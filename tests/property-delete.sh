@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env
 
 TEST="Can delete property"
 PAYLOAD="$(cat ./tests/property-delete.json | jq '.' -c)"
