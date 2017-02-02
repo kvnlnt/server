@@ -7,7 +7,7 @@ sleep 1
 time {
 
 
-    PAYLOAD="$(jq '.' ./tests/property-list.json -c)"
+    PAYLOAD="$(jq '.' ./tests/property-read.json -c)"
 
     # Number of consecutive users
     for i in `seq 1 30`;

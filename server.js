@@ -6,9 +6,11 @@ const mysql = require('mysql');
 
 // resources
 const Property = require("./resources/property");
+const System = require("./resources/system");
 
 // resource endpoints
 var resources = {};
+resources["/system/health"] = System.health;
 resources["/property/create"] = Property.create;
 resources["/property/read"] = Property.read;
 resources["/property/list"] = Property.list;
