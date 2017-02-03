@@ -1,4 +1,4 @@
 {
     "resource":"/system/health",
-    "payload":"hello"
+    "payload":"OK"
 }

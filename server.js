@@ -24,7 +24,8 @@ class Register {
         this.response = response;
         this.body = '';
         this.head = {
-            "Content-Type":"application.json"
+            "Content-Type":"application.json",
+            "Connection":"close"
         };
     }
 

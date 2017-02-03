@@ -7,21 +7,21 @@ sleep 1
 time {
 
 
-    PAYLOAD="$(jq '.' ./tests/property-read.json -c)"
+    PAYLOAD="$(jq '.' ./tests/system-health.json -c)"
+    # echo $PAYLOAD
 
     # Number of consecutive users
-    for i in `seq 1 30`;
+    for i in `seq 1 10`;
     do
         # number of consecutive requests
         curl -s -H "Content-Type: application/json" -X POST -d ${PAYLOAD} "http://localhost:3333?[1-10]" &
         pidlist="$pidlist $!"
         let "USERS+=1"
-        let "REQS+=10"
+        let "REQS+=1"
     done  
 
     # check for failures
     for job in $pidlist; do 
-      echo $job   
       wait $job || let "FAIL+=1" 
     done  
 

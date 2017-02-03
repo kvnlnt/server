@@ -13,6 +13,7 @@ sleep 1 # give server chance to start
 ## TESTS
 ##
 
+. tests/system-health.sh
 . tests/property-create.sh
 . tests/property-read.sh
 . tests/property-list.sh
