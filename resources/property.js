@@ -7,7 +7,7 @@ module.exports = {
     },
     list: function(payload, db, cb){
         db.query('CALL property_list(1,1)', function (error, results, fields) {
-          if (error) return cb(error, error);
+          if (error) return cb(error, null);
           return cb(null, results[0][0]);
         });
     },
